@@ -1,0 +1,11 @@
+: 1
+name: nlohmann-json-schema-validator
+version: 2.1.0-a.0.z
+summary: This is a C++ library for validating JSON documents based on a JSON Schema which itself should validate with draft-7 of JSON Schema Validation.
+license: MIT
+description-file: UPSTREAM.README.md
+url: https://github.com/pboettch/json-schema-validator.git
+email: swat.somebug@gmail.com
+depends: * build2 >= 0.13.0
+depends: * bpkg >= 0.13.0
+depends: nlohmann-json >= 3.6.0

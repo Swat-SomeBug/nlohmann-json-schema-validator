@@ -1,0 +1,13 @@
+# Test executables.
+#
+issue-*
+error
+uri
+string-format-check-test
+json-schema-test
+json-schema-validate
+
+# Testscript output directories (can be symlinks).
+#
+test
+test-*

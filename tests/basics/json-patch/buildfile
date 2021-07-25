@@ -1,0 +1,7 @@
+# Upstream reaches into the source directory and includes internal file
+# To make a clean separatation, a weired folder structure is created here
+# To please the preprocessor's the include path is manipuated
+
+import libs = nlohmann-json-schema-validator%lib{json-schema-validator}
+./: exe{json-patch}: cxx{test/json-patch} hxx{src/json-patch} $libs
+cxx.poptions += "-I$src_base/test"

@@ -1,0 +1,114 @@
+import libs = nlohmann-json-schema-validator%lib{json-schema-validator}
+
+source_path = [dir_path] $src_base/JSON-Schema-Test-Suite
+tests_path = [dir_path] $source_path/tests/draft7
+
+./: exe{json-schema-test}: cxx{$source_path/json-schema-test} $libs
+cxx.poptions += "-DJSON_SCHEMA_TEST_SUITE_PATH=\"$source_path\""
+
+exe{json-schema-test}: test = false
+
+# Base Tests
+suite_files = additionalItems.json \
+              additionalProperties.json \
+              allOf.json \
+              anyOf.json \
+              boolean_schema.json \
+              const.json \
+              contains.json \
+              default.json \
+              definitions.json \
+              dependencies.json \
+              enum.json \
+              exclusiveMaximum.json \
+              exclusiveMinimum.json \
+              format.json \
+              if-then-else.json \
+              items.json \
+              maximum.json \
+              maxItems.json \
+              maxLength.json \
+              maxProperties.json \
+              minimum.json \
+              minItems.json \
+              minLength.json \
+              minProperties.json \
+              multipleOf.json \
+              not.json \
+              oneOf.json \
+              pattern.json \
+              patternProperties.json \
+              properties.json \
+              propertyNames.json \
+              ref.json \
+              refRemote.json \
+              required.json \
+              type.json \
+              uniqueItems.json
+
+for jfile: $suite_files
+{
+  n = $name($jfile)
+  ./: alias{JSON-Suite-$n}: exe{json-schema-test} testscript{pass} file{$tests_path/$jfile}
+  {
+    test = exe{json-schema-test}
+    ip_path = [path] $tests_path/$jfile
+  }
+}
+
+alias{JSON-Suite-refRemote}: file{$tests_path/remote/**.json}
+
+# Optional Tests -> Will fail
+optional_files = bignum.json content.json non-bmp-regex.json zeroTerminatedFloats.json
+
+for jfile: $optional_files
+{
+  n = $name($jfile)
+  ./: alias{JSON-Suite-optional-$n}: exe{json-schema-test} testscript{fail} file{$tests_path/optional/$jfile}
+  {
+    test = exe{json-schema-test}
+    ip_path = [path] $tests_path/optional/$jfile
+  }
+}
+
+# Optinal format test -> Failing
+optional_format_failing_files = ecmascript-regex.json \
+                                idn-email.json \
+                                idn-hostname.json \
+                                iri-reference.json \
+                                iri.json \
+                                json-pointer.json \
+                                relative-json-pointer.json \
+                                uri-reference.json \
+                                uri-template.json \
+                                uri.json
+
+for jfile: $optional_format_failing_files
+{
+  n = $name($jfile)
+  ./: alias{JSON-Suite-optional-format-failing-$n}: exe{json-schema-test} testscript{fail} file{$tests_path/optional/format/$jfile}
+  {
+    test = exe{json-schema-test}
+    ip_path = [path] $tests_path/optional/format/$jfile
+  }
+}
+
+# Optional Format Tests -> passing
+optional_format_passing_files = date.json \
+                                date-time.json \
+                                email.json \
+                                hostname.json \
+                                ipv4.json \
+                                ipv6.json \
+                                regex.json \
+                                time.json
+
+for jfile: $optional_format_passing_files
+{
+  n = $name($jfile)
+  ./: alias{JSON-Suite-optional-format-passing-$n}: exe{json-schema-test} testscript{pass} file{$tests_path/optional/format/$jfile}
+  {
+    test = exe{json-schema-test}
+    ip_path = [path] $tests_path/optional/format/$jfile
+  }
+}

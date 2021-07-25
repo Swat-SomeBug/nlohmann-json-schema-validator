@@ -1,0 +1,18 @@
+import libs = nlohmann-json-schema-validator%lib{json-schema-validator}
+
+
+./: exe{errors}: cxx{errors} $libs
+./: exe{uri}: cxx{uri} $libs
+./: exe{string-format-check-test}: cxx{string-format-check-test} $libs
+
+# Special handling as upstream reaches into src directory to pull a private header
+./: json-patch/
+
+issue_names = issue-25-default-values \
+              issue-70 \
+              issue-70-root-schema-constructor \
+              issue-98
+for issue_item: $issue_names
+{
+  ./: exe{$issue_item}: cxx{$issue_item} $libs
+}

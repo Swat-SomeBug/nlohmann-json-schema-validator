@@ -1,0 +1,10 @@
+: JSON-Suite-Fail
+{
+  $* <<< "$ip_path" 2>&1 >>~%EOM% != 0
+  %(
+  %.*
+  %)+
+  %Total RESULT:.+ succeeded - .+ failed%
+  EOM
+}
+

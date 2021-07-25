@@ -1,0 +1,47 @@
+intf_libs = # Interface dependencies.
+impl_libs = # Implementation dependencies.
+import intf_libs += nlohmann-json%lib{json}
+
+# Public headers.
+#
+pub = [dir_path] ../include
+
+include $pub
+
+pub_hdrs = $($pub/pub_hdrs)
+
+./: lib{json-schema-validator}: $pub/{$pub_hdrs}
+
+# Private headers and sources as well as dependencies.
+
+srcs = src/json-schema-draft7.json.cpp \
+       src/json-uri.cpp \
+       src/json-validator.cpp \
+       src/json-patch.cpp \
+       src/string-format-check.cpp
+lib{json-schema-validator}: cxx{$srcs} $impl_libs $intf_libs
+
+# Build options.
+#
+out_pfx_inc = [dir_path] $out_root/include/
+src_pfx_inc = [dir_path] $src_root/include/
+out_pfx_src = [dir_path] $out_root/src/
+src_pfx_src = [dir_path] $src_root/src/
+
+cxx.poptions =+ "-I$out_pfx_src" "-I$src_pfx_src" \
+                "-I$out_pfx_inc" "-I$src_pfx_inc"
+
+obja{*}: cxx.poptions +=
+objs{*}: cxx.poptions += -DJSON_SCHEMA_VALIDATOR_EXPORTS
+
+# Export options.
+#
+lib{json-schema-validator}:
+{
+  cxx.export.poptions = "-I$out_pfx_inc" "-I$src_pfx_inc"
+  cxx.export.libs = $intf_libs
+}
+
+# Don't install private headers.
+#
+{hxx ixx txx}{*}: install = false
