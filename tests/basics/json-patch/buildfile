@@ -4,4 +4,7 @@
 
 import libs = nlohmann-json-schema-validator%lib{json-schema-validator}
 ./: exe{json-patch}: cxx{test/json-patch} hxx{src/json-patch} $libs
-cxx.poptions += "-I$src_base/test"
+
+# Doesn't really matter if we point to src or test -> header file interally
+# always looks for ../src/json-patch.hpp. Needs only directory hierarchy
+cxx.poptions += "-I$src_base/src"

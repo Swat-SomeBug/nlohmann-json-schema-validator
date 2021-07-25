@@ -19,7 +19,7 @@ srcs = src/json-schema-draft7.json.cpp \
        src/json-validator.cpp \
        src/json-patch.cpp \
        src/string-format-check.cpp
-lib{json-schema-validator}: cxx{$srcs} $impl_libs $intf_libs
+lib{json-schema-validator}: hxx{src/*} cxx{$srcs} $impl_libs $intf_libs
 
 # Build options.
 #
