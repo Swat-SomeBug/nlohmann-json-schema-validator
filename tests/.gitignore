@@ -1,6 +1,9 @@
 # Test executables.
 #
-issue-*
+issue-25-default-values
+issue-70
+issue-70-root-schema-constructor
+issue-98
 errors
 uri
 string-format-check-test
