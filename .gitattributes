@@ -17,3 +17,16 @@
 # Use `binary` to make sure certain files are never auto-detected as text.
 #
 #*.png binary
+
+# Git attributest to ensure directory symlinks are recognised
+include/nlohmann symlink=dir
+src/src symlink=dir
+tests/json-schema-test-suite/JSON-Schema-Test-Suite symlink=dir
+tests/json-schema-validate/issue-100 symlink=dir
+tests/json-schema-validate/issue-101 symlink=dir
+tests/json-schema-validate/issue-12 symlink=dir
+tests/json-schema-validate/issue-27 symlink=dir
+tests/json-schema-validate/issue-48 symlink=dir
+tests/json-schema-validate/issue-54 symlink=dir
+tests/json-schema-validate/issue-9 symlink=dir
+tests/json-schema-validate/issue-96 symlink=dir
