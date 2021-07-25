@@ -56,7 +56,7 @@ for jfile: $suite_files
   }
 }
 
-alias{JSON-Suite-refRemote}: file{$tests_path/remote/**.json}
+alias{JSON-Suite-refRemote}: file{$source_path/remotes/*.json $source_path/remotes/folder/*.json}
 
 # Optional Tests -> Will fail
 optional_files = bignum.json content.json non-bmp-regex.json zeroTerminatedFloats.json

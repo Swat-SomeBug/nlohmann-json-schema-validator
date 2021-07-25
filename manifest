@@ -6,6 +6,7 @@ license: MIT
 description-file: UPSTREAM.README.md
 url: https://github.com/pboettch/json-schema-validator.git
 email: swat.somebug@gmail.com
+requires: c++11
 depends: * build2 >= 0.13.0
 depends: * bpkg >= 0.13.0
 depends: nlohmann-json >= 3.6.0
