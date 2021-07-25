@@ -6,6 +6,7 @@ uri
 string-format-check-test
 json-schema-test
 json-schema-validate
+json-patch
 
 # Testscript output directories (can be symlinks).
 #
