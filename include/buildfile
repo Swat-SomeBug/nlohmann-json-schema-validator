@@ -2,8 +2,8 @@ pub_hdrs = hxx{**}
 
 ./: $pub_hdrs
 
-hxx{**}:
+hxx{*}:
 {
-  install = include/nlohmann
-  install.subdirs = true
+  install = include/nlohmann/
+  # Don't need to further create subdirectory tree when installing
 }
