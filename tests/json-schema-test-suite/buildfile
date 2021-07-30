@@ -4,7 +4,9 @@ source_path = [dir_path] $src_base/JSON-Schema-Test-Suite
 tests_path = [dir_path] $source_path/tests/draft7
 
 ./: exe{json-schema-test}: cxx{$source_path/json-schema-test} $libs
-cxx.poptions += "-DJSON_SCHEMA_TEST_SUITE_PATH=\"$source_path\""
+info $source_path
+info "R\"\($source_path\)\""
+cxx.poptions += "-DJSON_SCHEMA_TEST_SUITE_PATH=R\"\($source_path\)\""
 
 exe{json-schema-test}: test = false
 

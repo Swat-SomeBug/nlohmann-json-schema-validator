@@ -42,6 +42,8 @@ lib{json-schema-validator}:
   cxx.export.libs = $intf_libs
 }
 
+libs{json-schema-validator}: cxx.export.poptions += -DJSON_SCHEMA_VALIDATOR_IMPORTS
+
 # Don't install private headers.
 #
 {hxx ixx txx}{*}: install = false
